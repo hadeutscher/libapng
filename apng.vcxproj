@@ -68,31 +68,35 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(ProjectDir)libapng\zlib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <OutDir>$(SolutionDir)$(Configuration)\$(PlatformShortName)\</OutDir>
+    <OutDir>$(SolutionDir)$(Configuration)\AnyCPU\</OutDir>
     <IntDir>$(Configuration)\$(PlatformShortName)\</IntDir>
+    <TargetName>$(ProjectName)$(PlatformArchitecture)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(ProjectDir)libapng\zlib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <OutDir>$(SolutionDir)$(Configuration)\$(PlatformShortName)\</OutDir>
+    <OutDir>$(SolutionDir)$(Configuration)\AnyCPU\</OutDir>
     <IntDir>$(Configuration)\$(PlatformShortName)\</IntDir>
+    <TargetName>$(ProjectName)$(PlatformArchitecture)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(ProjectDir)libapng\zlib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <OutDir>$(SolutionDir)$(Configuration)\$(PlatformShortName)\</OutDir>
+    <OutDir>$(SolutionDir)$(Configuration)\AnyCPU\</OutDir>
     <IntDir>$(Configuration)\$(PlatformShortName)\</IntDir>
+    <TargetName>$(ProjectName)$(PlatformArchitecture)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(ProjectDir)libapng\zlib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <OutDir>$(SolutionDir)$(Configuration)\$(PlatformShortName)\</OutDir>
+    <OutDir>$(SolutionDir)$(Configuration)\AnyCPU\</OutDir>
     <SourcePath>$(VC_SourcePath);</SourcePath>
     <ExcludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(MSBuild_ExecutablePath);$(VC_LibraryPath_x86);</ExcludePath>
     <ExecutablePath>$(VC_ExecutablePath_x86);$(WindowsSDK_ExecutablePath);$(VS_ExecutablePath);$(MSBuild_ExecutablePath);$(SystemRoot)\SysWow64;$(FxCopDir);$(PATH);</ExecutablePath>
     <ReferencePath>$(VC_ReferencesPath_x86);</ReferencePath>
     <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
     <IntDir>$(Configuration)\$(PlatformShortName)\</IntDir>
+    <TargetName>$(ProjectName)$(PlatformArchitecture)</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -211,4 +215,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <Target Name="AfterBuild">
+    <MSBuild Condition=" '$(Platform)' == 'Win32' " Projects="$(MSBuildProjectFile)" Properties="Platform=x64;PlatFormTarget=x64" RunEachTargetSeparately="true" />
+  </Target>
 </Project>
